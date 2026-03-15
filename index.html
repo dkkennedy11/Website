@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniel | Executive & Board Leader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0f1e;
+    --navy-mid: #111827;
+    --navy-light: #1a2540;
+    --charcoal: #1e2533;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-line: rgba(201,168,76,0.3);
+    --white: #f5f0e8;
+    --white-dim: rgba(245,240,232,0.6);
+    --white-faint: rgba(245,240,232,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.8rem 4rem;
+    background: linear-gradient(to bottom, rgba(10,15,30,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(2px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 8rem 4rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 80% at 10% 60%, rgba(26,37,64,0.8) 0%, transparent 60%),
+      linear-gradient(135deg, #0a0f1e 0%, #111827 50%, #0d1526 100%);
+  }
+
+  .hero-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 55%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold-line) 30%, var(--gold-line) 70%, transparent);
+    opacity: 0.4;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--white-dim);
+    max-width: 520px;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--gold-line);
+    padding-bottom: 0.4rem;
+    transition: gap 0.3s, color 0.3s;
+  }
+
+  .hero-cta:hover { gap: 1.25rem; color: var(--gold-light); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--white-dim);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: fadeUp 1.5s 0.5s ease both;
+  }
+
+  .scroll-bar {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  /* ── SECTION SHARED ── */
+  section {
+    padding: 7rem 4rem;
+    position: relative;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--gold-line);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: linear-gradient(to bottom, var(--navy), var(--navy-mid));
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-left {}
+
+  .about-text {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--white-dim);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text strong {
+    color: var(--white);
+    font-weight: 400;
+  }
+
+  .about-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  .stat-block {
+    border-left: 1px solid var(--gold-line);
+    padding-left: 1.5rem;
+  }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+  }
+
+  /* ── EXPERTISE ── */
+  #expertise {
+    background: var(--navy-mid);
+  }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--gold-line);
+    border: 1px solid var(--gold-line);
+    margin-top: 1rem;
+  }
+
+  .expertise-card {
+    background: var(--navy-mid);
+    padding: 2.5rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .expertise-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .expertise-card:hover { background: var(--navy-light); }
+  .expertise-card:hover::before { transform: scaleX(1); }
+
+  .expertise-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    opacity: 0.6;
+  }
+
+  .expertise-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.8rem;
+  }
+
+  .expertise-desc {
+    font-size: 0.85rem;
+    line-height: 1.75;
+    color: var(--white-dim);
+  }
+
+  /* ── BOARD ── */
+  #board {
+    background: linear-gradient(to bottom, var(--navy-mid), var(--navy));
+  }
+
+  .board-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+
+  .board-text {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--white-dim);
+  }
+
+  .board-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.5;
+    border-left: 2px solid var(--gold);
+    padding-left: 2rem;
+  }
+
+  .board-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--gold-line);
+    border: 1px solid var(--gold-line);
+  }
+
+  .board-item {
+    background: var(--navy);
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: background 0.3s;
+  }
+
+  .board-item:hover { background: var(--navy-light); }
+
+  .board-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .board-item-text {
+    font-size: 0.9rem;
+    color: var(--white-dim);
+    line-height: 1.5;
+  }
+
+  .board-item-text strong {
+    display: block;
+    color: var(--white);
+    font-weight: 400;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--navy);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%);
+  }
+
+  .contact-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-tagline {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--white-dim);
+    margin-bottom: 3rem;
+  }
+
+  .contact-email {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--gold-light);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--gold-line);
+    padding-bottom: 0.3rem;
+    transition: color 0.3s, border-color 0.3s;
+    margin-bottom: 3rem;
+    display: block;
+  }
+
+  .contact-email:hover {
+    color: var(--white);
+    border-color: var(--white);
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+
+  .contact-link {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .contact-link:hover { color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--white-faint);
+    padding: 1.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 0.7rem;
+    color: rgba(245,240,232,0.25);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    opacity: 0.5;
+  }
+
+  /* ── DIVIDER ── */
+  .gold-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-line), transparent);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50%       { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 2rem; }
+    #hero { padding: 8rem 2rem 4rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .board-intro { grid-template-columns: 1fr; gap: 2rem; }
+    .board-items { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Daniel</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#board">Board</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Executive &amp; Board Leader</div>
+    <h1>Strategy.<br><em>Narrative.</em><br>Credibility.</h1>
+    <p class="hero-sub">At the intersection of finance, technology, and communications — building institutions, shaping stories, and creating lasting value in emerging markets.</p>
+    <a href="#about" class="hero-cta">Discover more &rarr;</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-bar"></div>
+    Scroll
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <div class="section-label">About</div>
+        <h2>A career built at the edge of what's next.</h2>
+        <p class="about-text">I am an executive with deep roots in <strong>crypto, blockchain, and financial media</strong> — having led communications, investor relations, and strategic initiatives for some of the most consequential organizations in the digital asset space.</p>
+        <p class="about-text">My work sits at the convergence of <strong>institutional credibility and frontier technology</strong>. I translate complexity into conviction — for investors, boards, media, and the market at large.</p>
+        <p class="about-text">Across my career, I have served in director-level roles, held multiple board seats, and built a reputation for navigating high-stakes environments with integrity and precision.</p>
+      </div>
+      <div class="about-right reveal">
+        <div class="stat-block">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Years in Finance &amp; Media</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">4+</div>
+          <div class="stat-label">Board Seats Held</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">Director</div>
+          <div class="stat-label">Level Executive Experience</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">Crypto</div>
+          <div class="stat-label">Blockchain &amp; Digital Assets Focus</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="section-inner">
+    <div class="section-label reveal">Expertise</div>
+    <h2 class="reveal">Where I create the most value.</h2>
+    <div class="expertise-grid reveal">
+      <div class="expertise-card">
+        <div class="expertise-number">01</div>
+        <div class="expertise-title">Investor Relations</div>
+        <div class="expertise-desc">Building trusted frameworks between organizations and the capital markets — from institutional roadshows to sovereign wealth engagement and ongoing stakeholder communication.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-number">02</div>
+        <div class="expertise-title">Strategic Communications</div>
+        <div class="expertise-desc">Crafting the narratives that define reputations. Crisis management, brand positioning, media relations, and executive voice — with particular depth in crypto and financial media.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-number">03</div>
+        <div class="expertise-title">Blockchain &amp; Digital Assets</div>
+        <div class="expertise-desc">A native fluency in the technology, economics, and culture of Web3. Translating blockchain complexity for mainstream audiences, regulators, and institutional counterparts.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-number">04</div>
+        <div class="expertise-title">Executive Leadership</div>
+        <div class="expertise-desc">Director-level experience building and leading high-performance teams, managing P&amp;L, and driving organizational strategy in fast-moving, high-stakes environments.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-number">05</div>
+        <div class="expertise-title">Media &amp; Publishing</div>
+        <div class="expertise-desc">Deep ties to the financial and crypto media landscape — including content strategy, editorial direction, and the business of building trusted media properties at scale.</div>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-number">06</div>
+        <div class="expertise-title">AI &amp; Emerging Technology</div>
+        <div class="expertise-desc">Active practitioner in applied AI — building intelligent products at the frontier of automation and human interaction, with a particular focus on agentic systems for business.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- BOARD -->
+<section id="board">
+  <div class="section-inner">
+    <div class="board-intro">
+      <div class="reveal">
+        <div class="section-label">Board Experience</div>
+        <h2>Governance with a long view.</h2>
+        <p class="board-text">I bring an operator's instincts to the boardroom — with the financial literacy, communications expertise, and technology fluency that modern boards require. I have served across industries and stages, from emerging companies to established institutions.</p>
+      </div>
+      <div class="board-quote reveal">
+        "The best boards don't just oversee — they sharpen strategy, hold management accountable, and bring the outside world in."
+      </div>
+    </div>
+    <div class="board-items reveal">
+      <div class="board-item">
+        <div class="board-dot"></div>
+        <div class="board-item-text">
+          <strong>Strategic Oversight</strong>
+          Long-range planning, capital allocation, and executive accountability
+        </div>
+      </div>
+      <div class="board-item">
+        <div class="board-dot"></div>
+        <div class="board-item-text">
+          <strong>Risk &amp; Governance</strong>
+          Regulatory navigation, fiduciary responsibility, and institutional integrity
+        </div>
+      </div>
+      <div class="board-item">
+        <div class="board-dot"></div>
+        <div class="board-item-text">
+          <strong>Communications &amp; Reputation</strong>
+          Stakeholder trust, crisis readiness, and public narrative management
+        </div>
+      </div>
+      <div class="board-item">
+        <div class="board-dot"></div>
+        <div class="board-item-text">
+          <strong>Technology &amp; Innovation</strong>
+          Digital transformation, emerging tech adoption, and AI-readiness
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label reveal" style="justify-content:center;">Contact</div>
+    <h2 class="reveal" style="font-size:clamp(2rem,4vw,3rem);">Let's build something<br><em>worth building.</em></h2>
+    <p class="contact-tagline reveal">Whether you're considering a board appointment, exploring a strategic partnership, or leading an organization that needs a trusted communications and IR executive — I'd like to hear from you.</p>
+    <a href="mailto:hello@yourdomain.com" class="contact-email reveal">hello@yourdomain.com</a>
+    <div class="contact-links reveal">
+      <a href="https://linkedin.com/in/yourhandle" class="contact-link" target="_blank">LinkedIn</a>
+      <a href="#" class="contact-link">Resume</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">&copy; 2026 Daniel. All rights reserved.</span>
+  <span class="footer-mark">D</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav background on scroll
+  const navEl = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    navEl.style.background = window.scrollY > 60
+      ? 'rgba(10,15,30,0.97)'
+      : 'linear-gradient(to bottom, rgba(10,15,30,0.95) 0%, transparent 100%)';
+  });
+</script>
+</body>
+</html>
